@@ -1,3 +1,4 @@
+-- CREACION DE ESTRUCTURAS DE DB
 create database proyecto_1;
 
 use proyecto_1;
@@ -64,6 +65,46 @@ create table Retiro (
   fecha_retiro timestamp not null default now()
 );
 
+create table Retiro_Cuenta (
+  id_retiro_cuenta int not null auto_increment primary key,
+  id_retiro int not null,
+  id_cuenta int not null,
+  foreign key (id_retiro) references Retiro(id_retiro) on update cascade on delete restrict,
+  foreign key (id_cuenta) references Cuenta(id_cuenta) on update cascade on delete restrict 
+);
+
+create table Deposito (
+  id_deposito int not null auto_increment primary key,
+  monto_deposito decimal(20, 4) not null,
+  fecha_deposito timestamp not null default now()
+);
+
+create table Deposito_Cuenta (
+  id_deposito_cuenta int not null auto_increment primary key,
+  id_desposito int not null,
+  id_cuenta int not null,
+  foreign key (id_desposito) references Deposito(id_deposito) on update cascade on delete restrict,
+  foreign key (id_cuenta) references Cuenta(id_cuenta) on update cascade on delete restrict 
+);
+
+create table Tipo_Transaccion (
+  id_tipo_transaccion varchar(3) not null primary key,
+  descripcion varchar(25) not null
+);
+
+create table Transaccion (
+  id_transaccion int not null auto_increment primary key,
+  monto_transaccion decimal(20,4) not null,
+  fecha_transaccion timestamp not null default now(),
+  id_tipo_transaccion varchar(3) not null,
+  id_cuenta_origen int not null,
+  id_cuenta_destino int not null,
+  foreign key (id_tipo_transaccion) references Tipo_Transaccion(id_tipo_transaccion) on update cascade on delete restrict,
+  foreign key (id_cuenta_origen) references Cuenta(id_cuenta) on update cascade on delete restrict,
+  foreign key (id_cuenta_destino) references Cuenta(id_cuenta) on update cascade on delete restrict,
+);
+
+-- CREACION DE SP
 
 
 
