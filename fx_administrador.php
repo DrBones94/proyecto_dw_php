@@ -30,7 +30,7 @@
   }
 
   function obtener_cantidad_cuentas_creadas() {
-    $sql = "call sp_obtener_cuentas_creadas();";
+    $sql = "call sp_obtener_cantidad_cuentas_creadas();";
     $resultado = ejecutar_sql($slq);
 
     if ($resultado->num_rows == 0) return [];

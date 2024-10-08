@@ -105,8 +105,60 @@ create table Transaccion (
 );
 
 -- CREACION DE SP
+DELIMITER //
+create procedure sp_agregar_usuario(in nombre_ varchar(), in usuario_ varchar(), in password_ varchar(), in tipo_ varchar())
+begin
+  insert into Usuario(nombre, usuario, password, id_tipo_usuario) values (nombre_, usuario_, password_, tipo_);
+end //
+DELIMITER ;
 
+DELIMITER //
+create procedure sp_obtener_usuario(in tipo_)
+begin
+  select id_usuario, nombre, activo, id_tipo_usuario from Usuario where id_tipo_usuario = tipo_;
+end //
+DELIMITER ;
 
+DELIMITER //
+create procedure sp_bloquear_usuario(in id_usuario_)
+begin
+  update Usuario set activo = !activo where id_usuario = id_usuario_;
+end //
+DELIMITER ;
 
+DELIMITER //
+create procedure sp_obtener_cantidad_cuentas_creadas()
+begin
+  select count(1) from Cuenta where fecha_creacion between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure sp_obtener_cantidad_clientes_registrados()
+begin
+  select count(1) from Cliente where fecha_creacion between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure sp_obtener_cantidad_transacciones()
+begin
+  select count(1) from Transaccion where fecha_transaccion between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure sp_obtener_cantidad_retiros()
+begin
+  select count(1) from Retiro where fecha_retiro between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure sp_obtener_cantidad_depositos()
+begin
+  select count(1) from Deposito fecha_deposito between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
 
 
