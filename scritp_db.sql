@@ -1,7 +1,7 @@
--- CREACION DE ESTRUCTURAS DE DB
-create database proyecto_1;
+--- CREACION DE ESTRUCTURAS DE DB
+-- create database proyecto_1;
 
-use proyecto_1;
+-- use proyecto_1;
 
 create table Tipo_Usuario (
   id_tipo_usuario varchar(3) not null primary key,
@@ -101,7 +101,7 @@ create table Transaccion (
   id_cuenta_destino int not null,
   foreign key (id_tipo_transaccion) references Tipo_Transaccion(id_tipo_transaccion) on update cascade on delete restrict,
   foreign key (id_cuenta_origen) references Cuenta(id_cuenta) on update cascade on delete restrict,
-  foreign key (id_cuenta_destino) references Cuenta(id_cuenta) on update cascade on delete restrict,
+  foreign key (id_cuenta_destino) references Cuenta(id_cuenta) on update cascade on delete restrict
 );
 
 -- CREACION DE SP
