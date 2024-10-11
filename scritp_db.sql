@@ -101,26 +101,32 @@ create table Transaccion (
   id_cuenta_destino int not null,
   foreign key (id_tipo_transaccion) references Tipo_Transaccion(id_tipo_transaccion) on update cascade on delete restrict,
   foreign key (id_cuenta_origen) references Cuenta(id_cuenta) on update cascade on delete restrict,
-  foreign key (id_cuenta_destino) references Cuenta(id_cuenta) on update cascade on delete restrict,
+  foreign key (id_cuenta_destino) references Cuenta(id_cuenta) on update cascade on delete restrict
 );
+
+-- CATALOGOS INICIALES
+insert into Tipo_Usuario (id_tipo_usuario, descripcion)
+values 
+('ADM', 'Administrador'),
+('CAJ', 'Cajero');
 
 -- CREACION DE SP
 DELIMITER //
-create procedure sp_agregar_usuario(in nombre_ varchar(), in usuario_ varchar(), in password_ varchar(), in tipo_ varchar())
+create procedure sp_agregar_usuario(in nombre_ varchar(100), in usuario_ varchar(100), in password_ varchar(100), in tipo_ varchar(3))
 begin
-  insert into Usuario(nombre, usuario, password, id_tipo_usuario) values (nombre_, usuario_, password_, tipo_);
+  insert into Usuario(nombre, usuario, password, id_tipo_usuario) values (nombre_, usuario_, MD5(password_), tipo_);
 end //
 DELIMITER ;
 
 DELIMITER //
-create procedure sp_obtener_usuario(in tipo_)
+create procedure sp_obtener_usuario(in tipo_ varchar(3))
 begin
   select id_usuario, nombre, activo, id_tipo_usuario from Usuario where id_tipo_usuario = tipo_;
 end //
 DELIMITER ;
 
 DELIMITER //
-create procedure sp_bloquear_usuario(in id_usuario_)
+create procedure sp_bloquear_usuario(in id_usuario_ int)
 begin
   update Usuario set activo = !activo where id_usuario = id_usuario_;
 end //
@@ -157,7 +163,14 @@ DELIMITER ;
 DELIMITER //
 create procedure sp_obtener_cantidad_depositos()
 begin
-  select count(1) from Deposito fecha_deposito between (dateadd(yyyy, -2, getdate())) and (getdate());
+  select count(1) from Deposito where fecha_deposito between (dateadd(yyyy, -2, getdate())) and (getdate());
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure sp_autenticar_ususrio(in usuario_ varchar(100), in password_ varchar(100))
+begin
+  select * from Usuario where usuario = usuario_ and password = MD5(password_);
 end //
 DELIMITER ;
 
