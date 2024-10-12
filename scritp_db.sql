@@ -1,7 +1,7 @@
--- CREACION DE ESTRUCTURAS DE DB
-create database proyecto_1;
+--- CREACION DE ESTRUCTURAS DE DB
+-- create database proyecto_1;
 
-use proyecto_1;
+-- use proyecto_1;
 
 create table Tipo_Usuario (
   id_tipo_usuario varchar(3) not null primary key,
