@@ -17,7 +17,7 @@
     $sql = "call sp_obtener_usuario('CAJ');";
     $resultado = ejecutar_sql($sql);
     
-    if ($resultado->num_rows == 0) return [];
+    if ($resultado->num_rows == 0) return null;
     else return $resultado;
   }
 
@@ -74,10 +74,11 @@
     switch ($_POST['accion']) {
       case 'login':
         $autenticacion = autenticar_usuario($_POST['usuario'], $_POST['password']);
-        if ($autenticacion) 
+        if ($autenticacion) header('Location: http://proyecto-php.atwebpages.com/main_admin.php');
+        else header('Location: http://proyecto-php.atwebpages.com/login_admin.php');
         break;
       case 'registrar_cajero':
-        agregar_cajero($)
+        agregar_cajero($_POST['nombre'], $_POST['usuario'], $_POST['password']);
         break;
       default:
         break;

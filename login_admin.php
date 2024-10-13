@@ -7,9 +7,9 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body>
+  <body style="text-align: center;">
     <?php require('header.php')?>
-    <div class="card text-center" style="width: 18rem; margin-top: 15px; padding: 10px;">
+    <div class="card text-center" style="width: 18rem; margin-top: 15px; padding: 10px; display: inline-block;">
       <div class="card-body">
         <h5 class="card-title">Administrador</div>
         <form action="fx_administrador.php" method="post">
