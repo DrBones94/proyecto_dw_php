@@ -12,14 +12,15 @@
     <div class="card text-center" style="width: 18rem; margin-top: 15px; padding: 10px;">
       <div class="card-body">
         <h5 class="card-title">Administrador</div>
-        <form action="#">
+        <form action="fx_administrador.php" method="post">
+          <input type="hidden" name="accion" value="login">
           <div class="mb-3">
             <label class="form-label">Usuario</label>
-            <input type="text" class="form-control" id="usuario">
+            <input type="text" class="form-control" name="usuario">
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" name="password">
           </div>
           <button type="submit" class="btn btn-primary">Ingresar</button>
         </form>

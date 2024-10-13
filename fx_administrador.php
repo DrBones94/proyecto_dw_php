@@ -1,8 +1,8 @@
 <?
   require('util.php');
 
-  function agregar_cajero($cajero) {
-    $sql = "call sp_agragar_usuario('$cajero->nombre', '$cajero->usuario', '$cajero->password', 'CAJ')";
+  function agregar_cajero($nombre, $usuario, $password) {
+    $sql = "call sp_agragar_usuario('$nombre', '$usuario', '$password', 'CAJ')";
     $resultado = ejecutar_sql($sql);
     $_cajero = $resultado->fetch_assoc();
 
@@ -67,5 +67,20 @@
 
     if($resultado->num_rows == 0) return [];
     else return $resultado;
+  }
+
+
+  if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    switch ($_POST['accion']) {
+      case 'login':
+        $autenticacion = autenticar_usuario($_POST['usuario'], $_POST['password']);
+        if ($autenticacion) 
+        break;
+      case 'registrar_cajero':
+        agregar_cajero($)
+        break;
+      default:
+        break;
+    }
   }
 ?>

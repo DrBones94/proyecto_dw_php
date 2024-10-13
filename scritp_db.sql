@@ -168,7 +168,7 @@ end //
 DELIMITER ;
 
 DELIMITER //
-create procedure sp_autenticar_ususrio(in usuario_ varchar(100), in password_ varchar(100))
+create procedure sp_autenticar_usuario(in usuario_ varchar(100), in password_ varchar(100))
 begin
   select * from Usuario where usuario = usuario_ and password = MD5(password_);
 end //
